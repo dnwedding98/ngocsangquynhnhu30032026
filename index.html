@@ -8375,11 +8375,9 @@
 
 
 
-    <audio id="background-music" loop="">
-  <source src="https://bachlong-trading.com/wp-content/uploads/2024/05/EM-DONG-Y-I-DO-DUC-PHUC-x-911-x-KHAC-HUNG-1ST-LIVE-STAGE.mp3">
-</audio>
+    <audio id="background-music" loop="" src="public/audio/backgroup.mp3"></audio>
 
-    <!-- Nút toggle nhạc -->
+    <!-- Nút toggle nhạc --> 
     <div id="music-toggle" title="Bật / Tắt nhạc">
         <img id="play-icon" src="https://w.ladicdn.com/675faed0e377b9028f9ce15b/z6534118287384_2d3714509a6ba1189cdd2f91394abbba-20250423093345-lgbe3.jpg" alt="Play Icon">
         <img id="pause-icon" src="https://w.ladicdn.com/675faed0e377b9028f9ce15b/musical-note-20250423091909-s5ori.png" alt="Pause Icon" style="display: none;">
@@ -8391,13 +8389,15 @@
             const toggleButton = document.getElementById("music-toggle");
             const playIcon = document.getElementById("play-icon");
             const pauseIcon = document.getElementById("pause-icon");
+            const openCardBtn = document.getElementById("openCardBtn");
 
             let isPlaying = false;
             let hasStarted = false;
 
             // Chạm lần đầu để phát nhạc
-            document.body.addEventListener("click", function() {
+            openCardBtn.addEventListener("click", function() {
                 if (!hasStarted) {
+                    console.log("run");
                     audio.play().then(() => {
                         isPlaying = true;
                         hasStarted = true;
@@ -8436,10 +8436,149 @@
 
     <!-- Attribution (ẩn) -->
     <p style="display: none;">Icon by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a></p>
+        <script>
+        // Xử lý preloader
+        window.addEventListener("load", function() {
+            const preloader = document.getElementById("preloader");
+
+            //set invite text
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const inviteParam = urlParams.get('invite');
+            const inviteText = document.getElementById("invite-text");
+            if (inviteParam) {
+                inviteText.textContent = `Trân Trọng Kính Mời: ${decodeCustom(inviteParam)}`;
+            }
+        });
+        // Hàm mở thiệp khi nhấn nút
+        function openCard() {
+            preloader.style.opacity = "0";
+            preloader.style.transition = "opacity 1s ease-in-out";
+            setTimeout(() => {
+                preloader.style.display = "none";
+            }, 1000); // Chờ 1 giây sau khi ẩn preloader
+            document.body.style.overflow = 'auto';
+        }
+    </script>
+    <style>
+        /* Đặt toàn màn hình */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://w.ladicdn.com/s768x890/5c728619c417ab07e5194baa/istockphoto-1370544962-612x612-20240609095545-gdg85.jpg');
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            z-index: 90000060;
+            gap: 10px
+        }
+
+        #preloader h1 {
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 2s ease-in-out infinite;
+            font-family: "Dancing Script", cursive;
+            font-size: clamp(24px, 8vw, 60px);
+            /* Điều chỉnh font-size từ 24px đến 60px, dựa trên chiều rộng viewport */
+            font-style: italic;
+            line-height: 1.2;
+            color: rgb(139, 91, 19);
+            text-align: center;
+        }
+
+        #preloader h2 {
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 2s ease-in-out infinite;
+            font-family: "Dancing Script", cursive;
+            font-size: 2rem;
+            /* Điều chỉnh font-size từ 24px đến 60px, dựa trên chiều rộng viewport */
+            font-style: italic;
+            line-height: 1.2;
+            color: rgb(139, 91, 19);
+            text-align: center;
+        }
+
+        #preloader .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-top: 5px solid white;
+            border-radius: 50%;
+            margin-top: 20px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes fadeIn {
+            0%,
+            100% {
+                opacity: 0.5;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        #content {
+            display: none;
+            text-align: center;
+            font-size: 2rem;
+            color: #333;
+        }
+
+        #content h1 {
+            color: #ff6f61;
+            font-size: 4rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1.3rem;
+            color: white;
+            background-color: rgb(123, 79, 13);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border-radius: 10px;
+            font-family: "Dancing Script", cursive;
+        }
+
+        .btn:hover {
+            background-color: rgb(123, 79, 13);
+        }
+    </style>
 </head>
 
 <body class="lazyload"><svg xmlns="http://www.w3.org/2000/svg" style="width: 0px; height: 0px; position: absolute; overflow: hidden; display: none;"><symbol id="shape_kOfpWieUfu" viewBox="0 0 1792 1896.0833"> <path d="M896 1664q-26 0-44-18l-624-602q-10-8-27.5-26T145 952.5 77 855 23.5 734 0 596q0-220 127-344t351-124q62 0 126.5 21.5t120 58T820 276t76 68q36-36 76-68t95.5-68.5 120-58T1314 128q224 0 351 124t127 344q0 221-229 450l-623 600q-18 18-44 18z"></path> </symbol><symbol id="shape_UknWNhvCaf" viewBox="0 0 100 100">
- <g>
+    <div id="preloader">
+        <h1>Ngọc Sáng & Quỳnh Như</h1>
+        <h2 id="invite-text">Trân Trọng Kính Mời</h2>
+        <!-- <div class="spinner">Trân trọng kính mời</div> -->
+        <button class="btn" id="openCardBtn" onclick="openCard()">Mở Thiệp</button>
+    </div> 
+<g>
   <path d="m87.5 46.875c-1.707 0-3.125 1.418-3.125 3.125 0 9-3.5 17.168-9.168 23.293-1.918-7-7.168-12.75-14.125-15.75 2.043-1.625 3.75-3.707 4.918-6.168 0.75-1.543 0.082031-3.418-1.5-4.168-1.543-0.75-3.418-0.082031-4.168 1.5-1.875 4-5.957 6.543-10.375 6.543-6.332 0-11.457-5.125-11.457-11.457s5.125-11.457 11.457-11.457c1.707 0 3.125-1.418 3.125-3.125 0-1.707-1.418-3.125-3.125-3.125-9.75 0-17.707 7.957-17.707 17.707 0 5.582 2.625 10.5 6.668 13.75-6.957 3-12.25 8.793-14.168 15.793-5.668-6.125-9.168-14.293-9.168-23.293 0.042969-19 15.461-34.418 34.418-34.418 1.707 0 3.125-1.418 3.125-3.125s-1.418-3.125-3.125-3.125c-22.418 0-40.625 18.207-40.625 40.625s18.207 40.625 40.625 40.625 40.625-18.207 40.625-40.625c0-1.707-1.418-3.125-3.125-3.125zm-37.5 37.5c-7.332 0-14.082-2.332-19.668-6.25 0.625-9.293 9.168-16.668 19.668-16.668s19.082 7.418 19.668 16.668c-5.582 3.918-12.375 6.25-19.668 6.25z"></path>
   <path d="m72.918 44.793c9.75 0 17.707-7.957 17.707-17.707s-7.957-17.707-17.707-17.707-17.707 7.957-17.707 17.707 7.957 17.707 17.707 17.707zm0-29.168c6.332 0 11.457 5.125 11.457 11.457s-5.125 11.457-11.457 11.457-11.457-5.125-11.457-11.457 5.125-11.457 11.457-11.457z"></path>
   <path d="m70.832 34.375c0.79297 0 1.582-0.29297 2.207-0.91797l8.332-8.332c1.207-1.207 1.207-3.207 0-4.418-1.207-1.207-3.207-1.207-4.418 0l-6.125 6.125-1.957-1.957c-1.207-1.207-3.207-1.207-4.418 0-1.207 1.207-1.207 3.207 0 4.418l4.168 4.168c0.625 0.625 1.418 0.91797 2.207 0.91797z"></path>
